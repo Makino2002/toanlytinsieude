@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thông báo thời khóa biểu lớp học online tháng 7</title>
+    <title>toanlytinsieude | Thời khóa biểu lớp học online tháng 7</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
@@ -30,10 +30,269 @@
         scroll-behavior: smooth;
       }
       body {
+        position: relative;
+        min-height: 100vh;
         font-family: "Be Vietnam Pro", sans-serif;
         color: var(--ink);
-        background: var(--white);
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            rgba(37, 99, 235, 0.22),
+            transparent 32%
+          ),
+          radial-gradient(
+            circle at 92% 8%,
+            rgba(251, 191, 36, 0.2),
+            transparent 26%
+          ),
+          radial-gradient(
+            circle at 50% 22%,
+            rgba(15, 42, 92, 0.08),
+            transparent 38%
+          ),
+          linear-gradient(180deg, #f1f7ff 0%, #e5eefc 42%, #ffffff 100%);
         overflow-x: hidden;
+      }
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+      }
+      body::before {
+        background-image:
+          linear-gradient(rgba(193, 207, 238, 0.55) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(193, 207, 238, 0.55) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(
+          circle at center,
+          black 0%,
+          transparent 68%
+        );
+        opacity: 0.7;
+      }
+      body::after {
+        background:
+          radial-gradient(
+            circle at 15% 20%,
+            rgba(37, 99, 235, 0.16),
+            transparent 0 22%
+          ),
+          radial-gradient(
+            circle at 82% 14%,
+            rgba(251, 191, 36, 0.16),
+            transparent 0 20%
+          ),
+          radial-gradient(
+            circle at 75% 78%,
+            rgba(37, 99, 235, 0.12),
+            transparent 0 24%
+          );
+        filter: blur(4px);
+      }
+      body.loading {
+        overflow: hidden;
+      }
+      body.loading > :not(.intro-screen) {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      body.loaded > :not(.intro-screen) {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition:
+          opacity 0.35s ease,
+          visibility 0.35s ease;
+      }
+      noscript .intro-screen {
+        display: none !important;
+      }
+      noscript body > :not(.intro-screen) {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+      }
+      .intro-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background:
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(37, 99, 235, 0.34),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 82% 18%,
+            rgba(251, 191, 36, 0.26),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 50% 75%,
+            rgba(15, 42, 92, 0.34),
+            transparent 36%
+          ),
+          linear-gradient(135deg, #0b1f46 0%, #123b7f 52%, #eaf2ff 100%);
+        color: #fff;
+        transition:
+          opacity 0.45s ease,
+          visibility 0.45s ease;
+      }
+      .intro-screen::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+        background-size: 52px 52px;
+        opacity: 0.45;
+      }
+      .intro-screen::after {
+        content: "";
+        position: absolute;
+        width: min(82vw, 840px);
+        height: min(82vw, 840px);
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.18) 0%,
+          transparent 68%
+        );
+        filter: blur(10px);
+      }
+      .intro-panel {
+        position: relative;
+        z-index: 1;
+        width: min(92vw, 540px);
+        padding: 30px 28px 28px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 24px 60px rgba(7, 18, 43, 0.28);
+        backdrop-filter: blur(18px);
+      }
+      body.loaded .intro-screen {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .intro-card {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .intro-kicker {
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.86);
+      }
+      .intro-logo-wrap {
+        width: 118px;
+        height: 118px;
+        border-radius: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      }
+      .intro-logo {
+        width: 84px;
+        height: 84px;
+        object-fit: contain;
+      }
+      .intro-title {
+        font-size: clamp(28px, 5vw, 54px);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+      .intro-sub {
+        max-width: 360px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .intro-progress {
+        width: min(100%, 280px);
+        height: 10px;
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 4px;
+        background: rgba(255, 255, 255, 0.16);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .intro-progress span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          #fbbf24 0%,
+          #ffffff 50%,
+          #2563eb 100%
+        );
+        transform-origin: left center;
+        animation: loadFill 1.7s ease-in-out infinite;
+      }
+      .intro-bars {
+        margin: 6px auto 0;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+      .intro-bars span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        animation: pulse 1.2s infinite ease-in-out;
+      }
+      .intro-bars span:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+      .intro-bars span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.55;
+        }
+        50% {
+          transform: translateY(-6px);
+          opacity: 1;
+        }
+      }
+      @keyframes loadFill {
+        0% {
+          transform: scaleX(0.08);
+          opacity: 0.75;
+        }
+        50% {
+          transform: scaleX(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scaleX(0.08);
+          opacity: 0.75;
+        }
       }
       .mono {
         font-family: "JetBrains Mono", monospace;
@@ -328,7 +587,7 @@
       }
       .qr-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 18px;
         max-width: 820px;
         margin: 0 auto;
@@ -365,6 +624,23 @@
         font-size: 11px;
         color: var(--ink-soft);
         font-family: "JetBrains Mono", monospace;
+      }
+      .qr-shot,
+      .fb-shot {
+        width: 100%;
+        display: block;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      .qr-shot {
+        aspect-ratio: 1;
+        margin-bottom: 14px;
+      }
+      .fb-shot {
+        width: 100%;
+        height: 180px;
       }
       .qr-card strong {
         font-size: 14px;
@@ -691,67 +967,89 @@
       .feedback {
         padding: 76px 24px;
       }
+      .feedback-slider {
+        position: relative;
+        max-width: 980px;
+        margin: 0 auto;
+        overflow: hidden;
+      }
       .feedback-track {
         display: flex;
-        gap: 20px;
         overflow-x: auto;
-        padding-bottom: 12px;
+        padding: 0 56px 12px;
         scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
       }
       .feedback-track::-webkit-scrollbar {
-        height: 6px;
+        display: none;
       }
-      .feedback-track::-webkit-scrollbar-thumb {
-        background: var(--line);
-        border-radius: 6px;
-      }
-      .fb-card {
-        min-width: 280px;
-        scroll-snap-align: start;
-        background: #fff;
+      .feedback-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
         border: 1px solid var(--line);
-        border-radius: var(--radius);
-        padding: 24px;
-      }
-      .stars {
-        color: var(--yellow);
-        font-size: 15px;
-        margin-bottom: 12px;
-        letter-spacing: 2px;
-      }
-      .fb-card p {
-        color: var(--ink);
-        font-size: 15px;
-        font-style: italic;
-        margin-bottom: 16px;
-      }
-      .fb-who {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .fb-avatar {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        background: var(--blue-light);
-        color: var(--blue);
-        font-weight: 800;
+        background: #fff;
+        color: var(--navy);
+        box-shadow: 0 12px 24px -14px rgba(15, 42, 92, 0.35);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 13px;
+        cursor: pointer;
+        z-index: 2;
       }
-      .fb-who span {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--navy);
+      .feedback-nav:hover {
+        transform: translateY(-50%) scale(1.04);
       }
-      .fb-who small {
+      .feedback-nav.prev {
+        left: 0;
+      }
+      .feedback-nav.next {
+        right: 0;
+      }
+      .fb-card {
+        flex: 0 0 100%;
+        min-width: 100%;
+        scroll-snap-align: start;
+        background: var(--blue);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .fb-shot {
+        width: 100%;
+        height: min(72vh, 720px);
         display: block;
-        font-size: 11.5px;
-        color: var(--ink-soft);
-        font-weight: 400;
+        object-fit: contain;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+      @media (max-width: 760px) {
+        .feedback-track {
+          padding: 0 42px 12px;
+        }
+        .feedback-nav {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      @media (max-width: 520px) {
+        .feedback-track {
+          padding: 0 34px 12px;
+        }
+        .fb-card {
+          min-width: 100%;
+        }
+        .fb-shot {
+          height: min(64vh, 560px);
+        }
       }
 
       /* ---------- PROCESS ---------- */
@@ -1008,10 +1306,31 @@
       }
     </style>
   </head>
-  <body>
+  <body class="loading">
+    <div class="intro-screen" aria-hidden="true">
+      <div class="intro-panel">
+        <div class="intro-card">
+          <div class="intro-kicker">toanlytinsieude</div>
+          <div class="intro-logo-wrap">
+            <img src="background.png" alt="Logo" class="intro-logo" />
+          </div>
+          <div class="intro-title">Đang tải giao diện</div>
+          <div class="intro-sub">
+            Vui lòng chờ trong giây lát để hệ thống nạp đầy đủ lịch học, học phí
+            và nội dung giảng viên.
+          </div>
+          <div class="intro-progress" aria-hidden="true"><span></span></div>
+          <div class="intro-bars" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
     <header>
       <nav>
-        <div class="logo">∑ <span>Toán & Lý</span> Online</div>
+        <div class="logo">∑ <span>toanlytinsieude</span></div>
         <div class="nav-links">
           <a href="#khoahoc">Khóa học</a>
           <a href="#hocphi">Học phí</a>
@@ -1064,25 +1383,37 @@
     <section class="contact">
       <div class="wrap section-head">
         <div class="eyebrow" style="justify-content: center">Liên hệ nhanh</div>
-        <h2>Nhắn Zalo để được tư vấn lớp phù hợp</h2>
+        <h2>QR giáo viên đồng bộ theo code</h2>
         <p>
-          Liên hệ trực tiếp với giảng viên để được hỗ trợ chọn lớp, sắp xếp lịch
-          và hỏi thêm về học phí.
+          Quét đúng mã QR của giáo viên để nhắn Zalo hoặc Facebook, đồng bộ trực
+          tiếp với file ảnh trong thư mục dự án.
         </p>
       </div>
       <div class="qr-grid">
         <div class="qr-card">
-          <div class="qr-box">QR CODE</div>
-          <strong>Nguyễn Minh Mẫn</strong>
+          <img
+            class="qr-shot"
+            src="QRGiaoVien/qrcode_NguyenMinhMan_zalo.png"
+            alt="QR Zalo Nguyễn Minh Mẫn"
+          />
+          <strong>Nguyễn Minh Mẫn - Zalo</strong>
         </div>
 
         <div class="qr-card">
-          <div class="qr-box">QR CODE</div>
-          <strong>Zalo Anh - 0584876785</strong>
+          <img
+            class="qr-shot"
+            src="QRGiaoVien/qrcode_NguyenMinhMan_facebook.png"
+            alt="QR Facebook Nguyễn Minh Mẫn"
+          />
+          <strong>Nguyễn Minh Mẫn - Facebook</strong>
         </div>
         <div class="qr-card">
-          <div class="qr-box">QR CODE</div>
-          <strong>Zalo Em</strong>
+          <img
+            class="qr-shot"
+            src="QRGiaoVien/HuynhNguyenKimTuyen_zalo.jpg"
+            alt="QR Zalo Huỳnh Nguyên Kim Tuyên"
+          />
+          <strong>Huỳnh Nguyên Kim Tuyên - Zalo</strong>
         </div>
       </div>
     </section>
@@ -1228,61 +1559,201 @@
       </div>
     </section>
 
+    <section class="schedule" id="lichhoc">
+      <div class="wrap section-head">
+        <div class="eyebrow" style="justify-content: center">Lịch học</div>
+        <h2>Giữ nguyên lịch cũ và thêm các lớp đã có học sinh</h2>
+        <p>
+          Lịch dưới đây đã được cập nhật theo các lớp đang có học sinh học ổn
+          định trong tuần.
+        </p>
+      </div>
+      <div class="wrap">
+        <div class="day-grid">
+          <div class="day-card">
+            <h4>Thứ 2</h4>
+            <div class="slot">
+              <span>Toán 9</span><span class="time">14h30 - 16h</span>
+            </div>
+            <div class="slot">
+              <span>Lý 11</span><span class="time">16h30 - 18h</span>
+            </div>
+          </div>
+          <div class="day-card">
+            <h4>Thứ 3</h4>
+            <div class="slot">
+              <span>Toán 11</span><span class="time">14h30 - 16h</span>
+            </div>
+            <div class="slot">
+              <span>Toán 12</span><span class="time">16h30 - 18h</span>
+            </div>
+            <div class="slot">
+              <span>Lý 10</span><span class="time">18h30 - 20h</span>
+            </div>
+          </div>
+          <div class="day-card">
+            <h4>Thứ 4</h4>
+            <div class="slot">
+              <span>Toán 9</span><span class="time">14h30 - 16h</span>
+            </div>
+          </div>
+          <div class="day-card">
+            <h4>Thứ 5</h4>
+            <div class="slot">
+              <span>Toán 11</span><span class="time">14h30 - 16h</span>
+            </div>
+            <div class="slot">
+              <span>Toán 12</span><span class="time">16h30 - 18h</span>
+            </div>
+            <div class="slot">
+              <span>Lý 10</span><span class="time">18h30 - 20h</span>
+            </div>
+          </div>
+          <div class="day-card">
+            <h4>Thứ 6</h4>
+            <div class="slot">
+              <span>Toán 9</span><span class="time">14h30 - 16h</span>
+            </div>
+            <div class="slot">
+              <span>Lý 11</span><span class="time">16h30 - 18h</span>
+            </div>
+          </div>
+          <div class="day-card">
+            <h4>Thứ 7</h4>
+            <div class="slot">
+              <span>Toán 11</span><span class="time">14h30 - 16h</span>
+            </div>
+            <div class="slot">
+              <span>Toán 12</span><span class="time">16h30 - 18h</span>
+            </div>
+            <div class="slot">
+              <span>Lý 10</span><span class="time">18h30 - 20h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="feedback" id="feedback">
       <div class="wrap section-head">
         <div class="eyebrow" style="justify-content: center">
           Học viên nói gì
         </div>
-        <h2>Kết quả thật, đánh giá thật</h2>
+        <h2>Feedback từ học sinh</h2>
       </div>
-      <div class="wrap">
+      <div class="wrap feedback-slider">
+        <button
+          class="feedback-nav prev"
+          type="button"
+          aria-label="Feedback trước"
+        >
+          ‹
+        </button>
+        <button
+          class="feedback-nav next"
+          type="button"
+          aria-label="Feedback tiếp"
+        >
+          ›
+        </button>
         <div class="feedback-track">
           <div class="fb-card">
-            <div class="stars">★★★★★</div>
-            <p>"Em từ 6.5 lên 9 điểm Toán chỉ sau một học kỳ."</p>
-            <div class="fb-who">
-              <div class="fb-avatar">M</div>
-              <div>
-                <span>Minh, học viên Toán 10</span
-                ><small>Phụ huynh xác nhận</small>
-              </div>
-            </div>
+            <img
+              class="fb-shot"
+              src="feedback/feedback1.jpg"
+              alt="Feedback 1"
+            />
           </div>
           <div class="fb-card">
-            <div class="stars">★★★★★</div>
-            <p>
-              "Anh giảng rất dễ hiểu, bài tập vừa sức nên em không bị ngợp."
-            </p>
-            <div class="fb-who">
-              <div class="fb-avatar">H</div>
-              <div>
-                <span>Huy, học viên Toán 8</span
-                ><small>Đánh giá qua Zalo</small>
-              </div>
-            </div>
+            <img
+              class="fb-shot"
+              src="feedback/feedback2.jpg"
+              alt="Feedback 2"
+            />
           </div>
           <div class="fb-card">
-            <div class="stars">★★★★★</div>
-            <p>"Điểm thi thử Vật Lý của con tăng rõ rệt sau 2 tháng học."</p>
-            <div class="fb-who">
-              <div class="fb-avatar">T</div>
-              <div>
-                <span>Phụ huynh bạn Trang</span><small>Học viên Lý 12</small>
-              </div>
-            </div>
+            <img
+              class="fb-shot"
+              src="feedback/feedback3.jpg"
+              alt="Feedback 3"
+            />
           </div>
           <div class="fb-card">
-            <div class="stars">★★★★★</div>
-            <p>
-              "Nhóm hỗ trợ trả lời câu hỏi rất nhanh, học lại buổi bận cũng dễ."
-            </p>
-            <div class="fb-who">
-              <div class="fb-avatar">K</div>
-              <div>
-                <span>Khánh, học viên Toán 11</span
-                ><small>Đánh giá qua Facebook</small>
-              </div>
-            </div>
+            <img
+              class="fb-shot"
+              src="feedback/feedback4.jpg"
+              alt="Feedback 4"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback5.png"
+              alt="Feedback 5"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback6.png"
+              alt="Feedback 6"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback7.png"
+              alt="Feedback 7"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback8.png"
+              alt="Feedback 8"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback9.png"
+              alt="Feedback 9"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback10.png"
+              alt="Feedback 10"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback11.png"
+              alt="Feedback 11"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback12.jpg"
+              alt="Feedback 12"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback13.jpg"
+              alt="Feedback 13"
+            />
+          </div>
+          <div class="fb-card">
+            <img
+              class="fb-shot"
+              src="feedback/feedback14.jpg"
+              alt="Feedback 14"
+            />
           </div>
         </div>
       </div>
@@ -1443,7 +1914,7 @@
     <footer>
       <div class="footer-inner">
         <div>
-          <div class="footer-logo">∑ Toán & Lý Online</div>
+          <div class="footer-logo">∑ toanlytinsieude</div>
           <p style="color: #8ca0c9; font-size: 13.5px; max-width: 260px">
             Thông báo thời khóa biểu các lớp học online tháng 7. Liên hệ Zalo
             0584876785 để được tư vấn.
@@ -1457,7 +1928,7 @@
           <a href="#faq">FAQ</a>
         </div>
       </div>
-      <div class="footer-bottom">© 2026 Thông báo lớp học online tháng 7.</div>
+      <div class="footer-bottom">© 2026 toanlytinsieude.</div>
     </footer>
 
     <div class="sticky-cta">
@@ -1485,6 +1956,23 @@
       const signupForm = document.getElementById("signup-form");
       const signupButton = document.getElementById("signup-button");
       const formStatus = document.getElementById("form-status");
+      const feedbackTrack = document.querySelector(".feedback-track");
+      const feedbackPrev = document.querySelector(".feedback-nav.prev");
+      const feedbackNext = document.querySelector(".feedback-nav.next");
+
+      const scrollFeedback = (direction) => {
+        if (!feedbackTrack) {
+          return;
+        }
+        const distance = Math.min(feedbackTrack.clientWidth * 0.9, 900);
+        feedbackTrack.scrollBy({
+          left: direction * distance,
+          behavior: "smooth",
+        });
+      };
+
+      feedbackPrev.addEventListener("click", () => scrollFeedback(-1));
+      feedbackNext.addEventListener("click", () => scrollFeedback(1));
 
       signupForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -1518,6 +2006,13 @@
           signupButton.disabled = false;
           signupButton.textContent = "Đăng ký ngay";
         }
+      });
+
+      window.addEventListener("load", () => {
+        window.setTimeout(() => {
+          document.body.classList.remove("loading");
+          document.body.classList.add("loaded");
+        }, 2000);
       });
     </script>
   </body>
