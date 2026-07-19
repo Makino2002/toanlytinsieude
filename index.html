@@ -2,7 +2,12 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
+    />
+    <meta name="theme-color" content="#0f2a5c" />
+    <meta name="description" content="Lịch học Toán & Vật Lý online tháng 7" />
     <title>toanlytinsieude | Thời khóa biểu lớp học online tháng 7</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -20,6 +25,7 @@
         --ink-soft: #4b5875;
         --line: #d9e2f5;
         --radius: 20px;
+        --transition: 0.3s ease;
       }
       * {
         box-sizing: border-box;
@@ -28,6 +34,7 @@
       }
       html {
         scroll-behavior: smooth;
+        font-size: clamp(14px, 1vw, 16px);
       }
       body {
         position: relative;
@@ -314,7 +321,7 @@
       .wrap {
         max-width: 1080px;
         margin: 0 auto;
-        padding: 0 24px;
+        padding: 0 clamp(16px, 3vw, 24px);
       }
 
       /* Graph paper texture accent used sparingly to nod at math subject */
@@ -327,7 +334,7 @@
 
       .eyebrow {
         font-family: "JetBrains Mono", monospace;
-        font-size: 13px;
+        font-size: clamp(12px, 1.2vw, 13px);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--blue);
@@ -335,7 +342,7 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 14px;
+        margin-bottom: clamp(10px, 1.5vw, 14px);
       }
       .eyebrow::before {
         content: "";
@@ -353,8 +360,8 @@
         color: var(--navy);
       }
       h2 {
-        font-size: clamp(26px, 3.4vw, 38px);
-        margin-bottom: 12px;
+        font-size: clamp(22px, 3.4vw, 38px);
+        margin-bottom: clamp(10px, 1.5vw, 12px);
       }
       p {
         color: var(--ink-soft);
@@ -363,12 +370,13 @@
 
       .section-head {
         max-width: 600px;
-        margin: 0 auto 48px;
+        margin: 0 auto clamp(36px, 6vw, 48px);
         text-align: center;
       }
       .section-head p {
         max-width: 520px;
         margin: 0 auto;
+        font-size: clamp(14px, 1.2vw, 16px);
       }
 
       /* ---------- NAV ---------- */
@@ -390,14 +398,41 @@
       }
       .logo {
         font-weight: 900;
-        font-size: 19px;
+        font-size: clamp(16px, 2vw, 19px);
         color: var(--navy);
         display: flex;
         align-items: center;
         gap: 8px;
+        flex-shrink: 0;
       }
       .logo span {
         color: var(--blue);
+      }
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        z-index: 999;
+      }
+      .nav-toggle span {
+        width: 24px;
+        height: 2px;
+        background: var(--navy);
+        border-radius: 2px;
+        transition: all var(--transition);
+      }
+      .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(10px, 10px);
+      }
+      .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(9px, -9px);
       }
       .nav-links {
         display: flex;
@@ -406,26 +441,102 @@
         font-weight: 600;
         color: var(--ink-soft);
       }
+      .nav-links a {
+        transition: color var(--transition);
+        padding: 8px 0;
+        border-bottom: 2px solid transparent;
+      }
       .nav-links a:hover {
         color: var(--blue);
+        border-bottom-color: var(--blue);
       }
       .nav-cta {
         background: var(--navy);
         color: #fff;
         padding: 10px 20px;
         border-radius: 999px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 700;
+        transition: all var(--transition);
+        white-space: nowrap;
       }
-      @media (max-width: 760px) {
+      .nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -6px rgba(15, 42, 92, 0.4);
+      }
+      .nav-room {
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--blue);
+        padding: 10px 20px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        border: 1.5px solid var(--blue);
+        transition: all var(--transition);
+        white-space: nowrap;
+      }
+      .nav-room:hover {
+        background: var(--blue);
+        color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -6px rgba(37, 99, 235, 0.4);
+      }
+      @media (max-width: 768px) {
+        nav {
+          padding: 12px 16px;
+        }
+        .nav-toggle {
+          display: flex;
+        }
         .nav-links {
+          position: absolute;
+          top: 60px;
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.96);
+          backdrop-filter: blur(10px);
+          flex-direction: column;
+          gap: 0;
+          padding: 16px 0;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height var(--transition);
+          border-bottom: 1px solid var(--line);
+        }
+        .nav-links.active {
+          max-height: 400px;
+        }
+        .nav-links a {
+          padding: 12px 24px;
+          font-size: 14px;
+          border-bottom: 1px solid var(--line);
+        }
+        .nav-links a.nav-room {
+          border-radius: 8px;
+          margin: 8px 12px;
+          padding: 10px 16px;
+          border-bottom: none;
+          border: 1.5px solid var(--blue);
+        }
+        .nav-cta {
           display: none;
+        }
+        .nav-room {
+          display: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 16px;
+        }
+        nav {
+          padding: 12px 12px;
         }
       }
 
       /* ---------- HERO ---------- */
       .hero {
-        padding: 80px 24px 64px;
+        padding: clamp(60px, 12vw, 80px) 24px clamp(48px, 10vw, 64px);
         background: linear-gradient(180deg, var(--blue-light) 0%, #fff 100%);
         position: relative;
       }
@@ -464,11 +575,11 @@
         background: #fff;
         border: 1px solid var(--line);
         border-radius: 999px;
-        padding: 7px 16px;
-        font-size: 13px;
+        padding: 8px 16px;
+        font-size: clamp(12px, 1.5vw, 13px);
         font-weight: 600;
         color: var(--blue);
-        margin-bottom: 24px;
+        margin-bottom: clamp(16px, 3vw, 24px);
       }
       .hero-badge::before {
         content: "●";
@@ -476,39 +587,44 @@
         font-size: 10px;
       }
       .hero h1 {
-        font-size: clamp(34px, 6vw, 58px);
+        font-size: clamp(28px, 6vw, 58px);
         letter-spacing: -0.02em;
+        line-height: 1.2;
       }
       .hero h1 .accent {
         color: var(--blue);
       }
       .hero-sub {
-        font-size: 18px;
-        margin: 20px auto 32px;
+        font-size: clamp(16px, 2.5vw, 18px);
+        margin: clamp(16px, 3vw, 20px) auto clamp(24px, 4vw, 32px);
         max-width: 560px;
       }
       .hero-actions {
         display: flex;
-        gap: 14px;
+        gap: 12px;
         justify-content: center;
         flex-wrap: wrap;
       }
       .btn {
-        padding: 15px 30px;
+        padding: clamp(12px, 2vw, 15px) clamp(20px, 3vw, 30px);
         border-radius: 14px;
         font-weight: 700;
-        font-size: 15px;
+        font-size: clamp(13px, 1.5vw, 15px);
         border: none;
         cursor: pointer;
         transition:
-          transform 0.15s ease,
-          box-shadow 0.15s ease;
+          transform var(--transition),
+          box-shadow var(--transition);
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        min-height: 44px;
       }
       .btn:hover {
         transform: translateY(-2px);
+      }
+      .btn:active {
+        transform: translateY(0);
       }
       .btn-primary {
         background: var(--blue);
@@ -525,10 +641,29 @@
         color: var(--navy);
         border: 1.5px solid var(--line);
       }
+      @media (max-width: 768px) {
+        .hero-actions {
+          gap: 10px;
+        }
+        .btn {
+          min-height: 44px;
+          font-size: 13px;
+        }
+      }
+      @media (max-width: 480px) {
+        .hero-actions {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
 
       /* stat strip - the signature "report card" element */
       .stat-card {
-        margin: 56px auto 0;
+        margin: clamp(40px, 8vw, 56px) auto 0;
         max-width: 900px;
         background: var(--navy);
         border-radius: 24px;
@@ -539,67 +674,60 @@
         background: linear-gradient(160deg, #122f66, #0f2a5c);
         border-radius: 19px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        padding: 28px 12px;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: clamp(12px, 2vw, 20px);
+        padding: clamp(20px, 3vw, 28px) clamp(12px, 2vw, 16px);
       }
       .stat {
         text-align: center;
         color: #fff;
-        padding: 6px 8px;
+        padding: 8px;
         position: relative;
-      }
-      .stat:not(:last-child)::after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 15%;
-        height: 70%;
-        width: 1px;
-        background: rgba(255, 255, 255, 0.15);
       }
       .stat .num {
         font-family: "JetBrains Mono", monospace;
-        font-size: clamp(22px, 3vw, 30px);
+        font-size: clamp(18px, 3vw, 30px);
         font-weight: 700;
         color: var(--yellow);
         display: block;
       }
       .stat .label {
-        font-size: 12.5px;
+        font-size: clamp(11px, 1.2vw, 12.5px);
         color: #b9c6e5;
         margin-top: 6px;
         font-weight: 500;
       }
-      @media (max-width: 640px) {
+      @media (max-width: 768px) {
         .stat-card-inner {
           grid-template-columns: repeat(2, 1fr);
-          row-gap: 24px;
         }
-        .stat:nth-child(2)::after {
-          display: none;
+      }
+      @media (max-width: 480px) {
+        .stat-card-inner {
+          grid-template-columns: 1fr;
         }
       }
 
       /* ---------- QR / CONTACT ---------- */
       .contact {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
         background: #fff;
       }
       .qr-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: clamp(16px, 2vw, 18px);
         max-width: 820px;
         margin: 0 auto;
       }
       .qr-card {
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        padding: 20px;
+        padding: clamp(16px, 2vw, 20px);
         text-align: center;
         transition:
-          box-shadow 0.2s ease,
-          transform 0.2s ease;
+          box-shadow var(--transition),
+          transform var(--transition);
       }
       .qr-card:hover {
         box-shadow: 0 16px 30px -14px rgba(37, 99, 235, 0.25);
@@ -621,7 +749,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
+        font-size: clamp(10px, 1.2vw, 11px);
         color: var(--ink-soft);
         font-family: "JetBrains Mono", monospace;
       }
@@ -643,36 +771,50 @@
         height: 180px;
       }
       .qr-card strong {
-        font-size: 14px;
+        font-size: clamp(13px, 1.5vw, 14px);
         color: var(--navy);
+        display: block;
+        word-break: break-word;
       }
-      @media (max-width: 700px) {
+      @media (max-width: 768px) {
         .qr-grid {
           grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .qr-grid {
+          grid-template-columns: 1fr;
+        }
+        .qr-card strong {
+          font-size: 12px;
         }
       }
 
       /* ---------- TEACHERS ---------- */
       .teachers {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
         background: var(--blue-light);
       }
       .teacher-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 28px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(20px, 2vw, 28px);
         max-width: 920px;
         margin: 0 auto;
       }
       .teacher-card {
         background: #fff;
         border-radius: var(--radius);
-        padding: 28px;
+        padding: clamp(20px, 2vw, 28px);
         border: 1px solid var(--line);
+        transition: transform var(--transition);
+      }
+      .teacher-card:hover {
+        transform: translateY(-4px);
       }
       .avatar {
-        width: 72px;
-        height: 72px;
+        width: clamp(56px, 8vw, 72px);
+        height: clamp(56px, 8vw, 72px);
         border-radius: 16px;
         margin-bottom: 16px;
         background: linear-gradient(135deg, var(--blue), var(--navy));
@@ -681,16 +823,16 @@
         justify-content: center;
         color: #fff;
         font-weight: 800;
-        font-size: 24px;
+        font-size: clamp(20px, 2.5vw, 24px);
       }
       .teacher-card h3 {
-        font-size: 20px;
+        font-size: clamp(18px, 2vw, 20px);
         margin-bottom: 2px;
       }
       .teacher-role {
         color: var(--blue);
         font-weight: 700;
-        font-size: 13.5px;
+        font-size: clamp(12px, 1.2vw, 13.5px);
         margin-bottom: 14px;
       }
       .teacher-card ul {
@@ -699,7 +841,7 @@
         gap: 8px;
       }
       .teacher-card li {
-        font-size: 14px;
+        font-size: clamp(13px, 1.2vw, 14px);
         color: var(--ink-soft);
         padding-left: 18px;
         position: relative;
@@ -711,28 +853,27 @@
         color: var(--blue);
         font-weight: 700;
       }
-      @media (max-width: 700px) {
-        .teacher-grid {
-          grid-template-columns: 1fr;
-        }
-      }
 
       /* ---------- WHY ---------- */
       .why {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
       }
       .why-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: clamp(16px, 2vw, 20px);
         max-width: 960px;
         margin: 0 auto;
       }
       .why-item {
-        padding: 26px;
+        padding: clamp(20px, 2vw, 26px);
         border-radius: var(--radius);
         border: 1px solid var(--line);
         background: #fff;
+        transition: all var(--transition);
+      }
+      .why-item:hover {
+        box-shadow: 0 12px 24px -12px rgba(37, 99, 235, 0.2);
       }
       .why-item .ico {
         width: 44px;
@@ -745,28 +886,19 @@
         font-weight: 800;
         color: var(--navy);
         margin-bottom: 14px;
+        font-size: 24px;
       }
       .why-item h3 {
-        font-size: 16.5px;
+        font-size: clamp(15px, 1.5vw, 16.5px);
         margin-bottom: 6px;
       }
       .why-item p {
-        font-size: 14px;
-      }
-      @media (max-width: 760px) {
-        .why-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 520px) {
-        .why-grid {
-          grid-template-columns: 1fr;
-        }
+        font-size: clamp(13px, 1.2vw, 14px);
       }
 
       /* ---------- COURSES ---------- */
       .courses {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
         background: var(--navy);
       }
       .courses .section-head h2,
@@ -778,8 +910,8 @@
       }
       .course-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: clamp(14px, 1.5vw, 18px);
         max-width: 1000px;
         margin: 0 auto;
       }
@@ -787,13 +919,18 @@
         background: rgba(255, 255, 255, 0.04);
         border: 1px solid rgba(255, 255, 255, 0.14);
         border-radius: var(--radius);
-        padding: 24px;
+        padding: clamp(18px, 2vw, 24px);
         color: #fff;
         display: flex;
         flex-direction: column;
+        transition: all var(--transition);
+      }
+      .course-card:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-4px);
       }
       .course-tag {
-        font-size: 12px;
+        font-size: clamp(11px, 1vw, 12px);
         font-weight: 700;
         color: var(--yellow);
         font-family: "JetBrains Mono", monospace;
@@ -801,11 +938,11 @@
       }
       .course-card h3 {
         color: #fff;
-        font-size: 21px;
+        font-size: clamp(18px, 2vw, 21px);
         margin: 8px 0 4px;
       }
       .course-price {
-        font-size: 15px;
+        font-size: clamp(13px, 1.2vw, 15px);
         color: #b9c6e5;
         margin-bottom: 16px;
       }
@@ -817,7 +954,7 @@
         gap: 6px;
       }
       .course-card li {
-        font-size: 13px;
+        font-size: clamp(12px, 1.1vw, 13px);
         color: #d7e0f5;
         padding-left: 16px;
         position: relative;
@@ -831,37 +968,27 @@
       .course-card .btn {
         width: 100%;
         justify-content: center;
-        font-size: 13.5px;
-        padding: 11px;
-      }
-      @media (max-width: 900px) {
-        .course-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 520px) {
-        .course-grid {
-          grid-template-columns: 1fr;
-        }
+        font-size: clamp(12px, 1.1vw, 13.5px);
+        padding: 10px 0;
       }
 
       /* ---------- PRICING TABLE ---------- */
       .pricing {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
       }
       table.price-table {
         width: 100%;
         max-width: 760px;
         margin: 0 auto;
         border-collapse: collapse;
-        font-size: 15px;
+        font-size: clamp(13px, 1.2vw, 15px);
       }
       .price-table th {
         text-align: left;
-        padding: 14px 18px;
+        padding: clamp(12px, 1.5vw, 14px) clamp(14px, 1.5vw, 18px);
         background: var(--navy);
         color: #fff;
-        font-size: 13px;
+        font-size: clamp(12px, 1vw, 13px);
         text-transform: uppercase;
         letter-spacing: 0.06em;
       }
@@ -873,7 +1000,7 @@
         text-align: right;
       }
       .price-table td {
-        padding: 14px 18px;
+        padding: clamp(12px, 1.5vw, 14px) clamp(14px, 1.5vw, 18px);
         border-bottom: 1px solid var(--line);
       }
       .price-table td:last-child {
@@ -893,25 +1020,29 @@
 
       /* ---------- SCHEDULE ---------- */
       .schedule {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
         background: var(--blue-light);
       }
       .schedule-tabs {
         display: flex;
         gap: 10px;
         justify-content: center;
-        margin-bottom: 28px;
+        flex-wrap: wrap;
+        margin-bottom: clamp(20px, 3vw, 28px);
       }
       .tab-btn {
-        padding: 10px 22px;
+        padding: clamp(8px, 1.2vw, 10px) clamp(16px, 2vw, 22px);
         border-radius: 999px;
         border: 1.5px solid var(--line);
         background: #fff;
         font-weight: 700;
-        font-size: 14px;
+        font-size: clamp(13px, 1.1vw, 14px);
         color: var(--ink-soft);
         cursor: pointer;
+        transition: all var(--transition);
+        min-height: 44px;
       }
+      .tab-btn:hover,
       .tab-btn.active {
         background: var(--navy);
         color: #fff;
@@ -919,8 +1050,8 @@
       }
       .day-grid {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: clamp(12px, 1.5vw, 16px);
         max-width: 940px;
         margin: 0 auto;
       }
@@ -928,21 +1059,23 @@
         background: #fff;
         border-radius: 16px;
         border: 1px solid var(--line);
-        padding: 18px;
+        padding: clamp(14px, 2vw, 18px);
       }
       .day-card h4 {
-        font-size: 14px;
+        font-size: clamp(13px, 1.2vw, 14px);
         color: var(--navy);
         margin-bottom: 10px;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+        font-weight: 700;
       }
       .slot {
         display: flex;
         justify-content: space-between;
-        font-size: 13.5px;
+        font-size: clamp(12px, 1.1vw, 13.5px);
         padding: 7px 0;
         border-top: 1px dashed var(--line);
+        gap: 12px;
       }
       .slot:first-of-type {
         border-top: none;
@@ -951,21 +1084,12 @@
         font-family: "JetBrains Mono", monospace;
         color: var(--blue);
         font-weight: 700;
-      }
-      @media (max-width: 760px) {
-        .day-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-      @media (max-width: 520px) {
-        .day-grid {
-          grid-template-columns: 1fr;
-        }
+        white-space: nowrap;
       }
 
       /* ---------- FEEDBACK ---------- */
       .feedback {
-        padding: 76px 24px;
+        padding: clamp(48px, 8vw, 76px) 24px;
       }
       .feedback-slider {
         position: relative;
@@ -976,7 +1100,7 @@
       .feedback-track {
         display: flex;
         overflow-x: auto;
-        padding: 0 56px 12px;
+        padding: 0 clamp(30px, 5vw, 56px) 12px;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         scrollbar-width: none;
@@ -988,8 +1112,8 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 48px;
-        height: 48px;
+        width: clamp(40px, 8vw, 48px);
+        height: clamp(40px, 8vw, 48px);
         border-radius: 50%;
         border: 1px solid var(--line);
         background: #fff;
@@ -1000,14 +1124,31 @@
         justify-content: center;
         cursor: pointer;
         z-index: 2;
+        transition: all var(--transition);
+        min-height: 44px;
+        min-width: 44px;
       }
       .feedback-nav:hover {
         transform: translateY(-50%) scale(1.04);
       }
       .feedback-nav.prev {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center; /* Căn ngang */
+        align-items: center; /* Căn dọc */
+        border: 3px solid var(--yellow);
+        font-size: 26px;
         left: 0;
       }
       .feedback-nav.next {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center; /* Căn ngang */
+        align-items: center; /* Căn dọc */
+        border: 3px solid var(--yellow);
+        font-size: 26px;
         right: 0;
       }
       .fb-card {
@@ -1017,44 +1158,46 @@
         background: var(--blue);
         border: 1px solid var(--line);
         border-radius: 24px;
-        padding: 18px;
+        padding: clamp(14px, 2vw, 18px);
         display: flex;
         align-items: center;
         justify-content: center;
       }
       .fb-shot {
         width: 100%;
-        height: min(72vh, 720px);
+        height: clamp(300px, 70vh, 720px);
         display: block;
         object-fit: contain;
         border-radius: 16px;
         border: 1px solid var(--line);
         background: #fff;
       }
-      @media (max-width: 760px) {
+      @media (max-width: 768px) {
         .feedback-track {
-          padding: 0 42px 12px;
+          padding: 0 clamp(24px, 4vw, 42px) 12px;
         }
         .feedback-nav {
-          width: 40px;
-          height: 40px;
+          width: clamp(36px, 6vw, 40px);
+          height: clamp(36px, 6vw, 40px);
         }
       }
-      @media (max-width: 520px) {
+      @media (max-width: 480px) {
         .feedback-track {
-          padding: 0 34px 12px;
+          padding: 0 clamp(20px, 3vw, 34px) 12px;
         }
-        .fb-card {
-          min-width: 100%;
+        .feedback-nav {
+          width: 36px;
+          height: 36px;
+          font-size: 18px;
         }
         .fb-shot {
-          height: min(64vh, 560px);
+          height: clamp(250px, 60vh, 560px);
         }
       }
 
       /* ---------- PROCESS ---------- */
       .process {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
         background: var(--navy);
       }
       .process .section-head h2 {
@@ -1068,16 +1211,18 @@
         max-width: 960px;
         margin: 0 auto;
         gap: 0;
+        flex-wrap: wrap;
       }
       .step {
         flex: 1;
         text-align: center;
         position: relative;
-        padding: 0 12px;
+        padding: 0 clamp(8px, 1.5vw, 12px);
+        min-width: clamp(120px, 25%, 200px);
       }
       .step .n {
-        width: 46px;
-        height: 46px;
+        width: clamp(40px, 6vw, 46px);
+        height: clamp(40px, 6vw, 46px);
         border-radius: 50%;
         background: var(--yellow);
         color: var(--navy);
@@ -1093,9 +1238,9 @@
       .step::after {
         content: "";
         position: absolute;
-        top: 23px;
-        left: calc(50% + 30px);
-        right: calc(-50% + 30px);
+        top: clamp(18px, 3vw, 23px);
+        left: calc(50% + 20px);
+        right: calc(-50% + 20px);
         height: 2px;
         background: rgba(255, 255, 255, 0.2);
       }
@@ -1104,14 +1249,14 @@
       }
       .step h4 {
         color: #fff;
-        font-size: 14.5px;
+        font-size: clamp(13px, 1.3vw, 14.5px);
         margin-bottom: 6px;
       }
       .step p {
         color: #b9c6e5;
-        font-size: 12.5px;
+        font-size: clamp(11px, 1vw, 12.5px);
       }
-      @media (max-width: 700px) {
+      @media (max-width: 768px) {
         .steps {
           flex-direction: column;
           gap: 28px;
@@ -1123,7 +1268,7 @@
 
       /* ---------- FORM ---------- */
       .form-section {
-        padding: 76px 24px;
+        padding: clamp(48px, 8vw, 76px) 24px;
         background: var(--blue-light);
       }
       .form-card {
@@ -1131,15 +1276,15 @@
         margin: 0 auto;
         background: #fff;
         border-radius: 24px;
-        padding: 36px;
+        padding: clamp(24px, 3vw, 36px);
         border: 1px solid var(--line);
         box-shadow: 0 30px 60px -30px rgba(15, 42, 92, 0.3);
       }
       .form-row {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-        margin-bottom: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: clamp(12px, 1.5vw, 14px);
+        margin-bottom: clamp(12px, 1.5vw, 14px);
       }
       .field {
         display: flex;
@@ -1147,19 +1292,20 @@
         gap: 6px;
       }
       .field label {
-        font-size: 13px;
+        font-size: clamp(12px, 1vw, 13px);
         font-weight: 700;
         color: var(--navy);
       }
       .field input,
       .field select,
       .field textarea {
-        padding: 12px 14px;
+        padding: clamp(10px, 1.2vw, 12px) clamp(12px, 1.5vw, 14px);
         border-radius: 10px;
         border: 1.5px solid var(--line);
         font-family: inherit;
-        font-size: 14px;
+        font-size: clamp(13px, 1vw, 14px);
         background: #fbfcff;
+        transition: all var(--transition);
       }
       .field input:focus,
       .field select:focus,
@@ -1175,13 +1321,13 @@
         width: 100%;
         justify-content: center;
         margin-top: 6px;
-        font-size: 16px;
-        padding: 16px;
+        font-size: clamp(14px, 1.2vw, 16px);
+        padding: clamp(14px, 1.5vw, 16px);
       }
       .form-status {
         margin-top: 14px;
         min-height: 20px;
-        font-size: 14px;
+        font-size: clamp(12px, 1vw, 14px);
         font-weight: 600;
         color: var(--ink-soft);
       }
@@ -1194,7 +1340,7 @@
 
       /* ---------- FAQ ---------- */
       .faq {
-        padding: 72px 24px;
+        padding: clamp(48px, 8vw, 72px) 24px;
       }
       .faq-list {
         max-width: 700px;
@@ -1209,21 +1355,28 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 20px 4px;
-        font-size: 16px;
+        padding: clamp(16px, 2vw, 20px) 4px;
+        font-size: clamp(15px, 1.3vw, 16px);
         font-weight: 700;
         color: var(--navy);
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-family: inherit;
+        transition: color var(--transition);
+        min-height: 44px;
+      }
+      .faq-q:hover {
+        color: var(--blue);
       }
       .faq-q::after {
         content: "+";
         font-size: 22px;
         color: var(--blue);
-        transition: transform 0.2s ease;
+        transition: transform var(--transition);
         font-weight: 400;
+        flex-shrink: 0;
+        margin-left: 12px;
       }
       .faq-item.open .faq-q::after {
         transform: rotate(45deg);
@@ -1231,18 +1384,19 @@
       .faq-a {
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.25s ease;
+        transition: max-height var(--transition);
       }
       .faq-a p {
-        padding: 0 4px 20px;
-        font-size: 14.5px;
+        padding: 0 4px clamp(14px, 1.5vw, 20px);
+        font-size: clamp(13px, 1.1vw, 14.5px);
+        line-height: 1.6;
       }
 
       /* ---------- FOOTER ---------- */
       footer {
         background: var(--navy);
         color: #b9c6e5;
-        padding: 48px 24px 24px;
+        padding: clamp(36px, 4vw, 48px) 24px clamp(16px, 2vw, 24px);
       }
       .footer-inner {
         max-width: 1080px;
@@ -1250,29 +1404,32 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        gap: 24px;
-        padding-bottom: 28px;
+        gap: clamp(16px, 2vw, 24px);
+        padding-bottom: clamp(20px, 2vw, 28px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       }
       .footer-logo {
         color: #fff;
         font-weight: 900;
-        font-size: 19px;
+        font-size: clamp(16px, 1.5vw, 19px);
         margin-bottom: 8px;
       }
       .footer-links {
         display: flex;
-        gap: 24px;
+        gap: clamp(16px, 2vw, 24px);
         flex-wrap: wrap;
-        font-size: 14px;
+        font-size: clamp(13px, 1vw, 14px);
+      }
+      .footer-links a {
+        transition: color var(--transition);
       }
       .footer-links a:hover {
         color: #fff;
       }
       .footer-bottom {
         max-width: 1080px;
-        margin: 20px auto 0;
-        font-size: 12.5px;
+        margin: clamp(14px, 1.5vw, 20px) auto 0;
+        font-size: clamp(11px, 1vw, 12.5px);
         text-align: center;
         color: #8ca0c9;
       }
@@ -1280,29 +1437,13 @@
       /* sticky CTA */
       .sticky-cta {
         position: fixed;
-        bottom: 22px;
-        right: 22px;
+        bottom: clamp(14px, 2vw, 22px);
+        right: clamp(14px, 2vw, 22px);
         z-index: 60;
       }
       .sticky-cta .btn {
         box-shadow: 0 14px 30px -8px rgba(37, 99, 235, 0.55);
-      }
-
-      @media (max-width: 640px) {
-        .qr-grid {
-          grid-template-columns: 1fr 1fr;
-        }
-        .form-row {
-          grid-template-columns: 1fr;
-        }
-        .sticky-cta {
-          right: 14px;
-          bottom: 14px;
-        }
-        .sticky-cta .btn {
-          padding: 13px 18px;
-          font-size: 13.5px;
-        }
+        min-height: 44px;
       }
     </style>
   </head>
@@ -1337,7 +1478,20 @@
           <a href="#lichhoc">Lịch học</a>
           <a href="#feedback">Đánh giá</a>
           <a href="#faq">FAQ</a>
+          <a href="#dangky" class="nav-cta" style="display: none"
+            >Đăng ký ngay</a
+          >
         </div>
+        <button
+          class="nav-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
         <a href="#dangky" class="nav-cta">Đăng ký ngay</a>
       </nav>
     </header>
@@ -1466,6 +1620,14 @@
           Danh sách lớp mở theo đúng khung giờ đã thông báo, học online và theo
           sát từng lớp.
         </p>
+        <a
+          href="https://meet.google.com/ahb-zfbp-raj"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-yellow"
+          style="margin-top: 16px"
+          >🎥 Vào phòng học ngay</a
+        >
       </div>
       <div class="course-grid">
         <div class="course-card">
@@ -2014,6 +2176,39 @@
           document.body.classList.add("loaded");
         }, 2000);
       });
+
+      // Mobile menu toggle
+      const navToggle = document.querySelector(".nav-toggle");
+      const navLinks = document.querySelector(".nav-links");
+
+      if (navToggle) {
+        navToggle.addEventListener("click", () => {
+          navToggle.classList.toggle("active");
+          navLinks.classList.toggle("active");
+          navToggle.setAttribute(
+            "aria-expanded",
+            navToggle.classList.contains("active"),
+          );
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll(".nav-links a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navToggle.classList.remove("active");
+            navLinks.classList.remove("active");
+            navToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest("header")) {
+            navToggle.classList.remove("active");
+            navLinks.classList.remove("active");
+            navToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
     </script>
   </body>
 </html>
